@@ -1,3 +1,5 @@
+const dotEnv = require('dotenv');
+dotEnv.config('.env');
 const env = process.env || {};
 
 module.exports = {
@@ -29,5 +31,23 @@ module.exports = {
    * 企业微信机器人配置
    * https://developer.work.weixin.qq.com/document/path/91770
    */
-  WEIXIN_WEBHOOK: env.WEIXIN_WEBHOOK
+  WEIXIN_WEBHOOK: env.WEIXIN_WEBHOOK,
+
+  SCTKEY: env.SCTKEY || '',
+  COOL_PUSH_SKEY: env.COOL_PUSH_SKEY || '',
+  COOL_PUSH_TYPE: (env.COOL_PUSH_TYPE || 'send'),
+  BER_KEY: env.BER_KEY || '',
+  EMAIL_ADDRESS: env.EMAIL_ADDRESS || '',
+  DINGTALK_ACCESS_TOKEN: env.DINGTALK_ACCESS_TOKEN || '',
+  DINGTALK_SECRET: env.DINGTALK_SECRET || '',
+  WX_ROBOT_KEY: env.WX_ROBOT_KEY || '',
+  WX_ROBOT_MSG_TYPE: (env.WX_ROBOT_MSG_TYPE || 'text'),
+  WX_APP_CORPID: env.WX_APP_CORPID || '',
+  WX_APP_AGENTID: Number(env.WX_APP_AGENTID),
+  WX_APP_SECRET: env.WX_APP_SECRET || '',
+  WX_APP_USERID: env.WX_APP_USERID || '',
+  PUSH_PLUS_TOKEN: env.PUSH_PLUS_TOKEN || '',
+  PUSH_PLUS_TEMPLATE_TYPE: (env.PUSH_PLUS_TEMPLATE_TYPE || 'html'),
+  I_GOT_KEY: env.I_GOT_KEY || '',
 };
+

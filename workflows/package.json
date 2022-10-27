@@ -9,9 +9,11 @@
     "seagold": "node seagold.js"
   },
   "dependencies": {
-    "juejin-helper": "^1.6.1",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.3",
     "fast-astar": "^1.0.6",
-    "nodemailer": "^6.7.0"
+    "juejin-helper": "^1.6.1",
+    "nodemailer": "^6.7.0",
+    "push-all-in-one": "^2.3.0"
   }
 }
