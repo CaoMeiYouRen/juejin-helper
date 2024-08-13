@@ -60,17 +60,17 @@ class CheckIn {
     this.contCount = counts.cont_count;
     this.sumCount = counts.sum_count;
 
-    const luckyusersResult = await growth.getLotteriesLuckyUsers();
-    if (luckyusersResult.count > 0) {
-      const no1LuckyUser = luckyusersResult.lotteries[0];
-      const dipLuckyResult = await growth.dipLucky(no1LuckyUser.history_id);
-      if (dipLuckyResult.has_dip) {
-        this.dipStatus = 2;
-      } else {
-        this.dipStatus = 1;
-        this.dipValue = dipLuckyResult.dip_value;
-      }
-    }
+    // const luckyusersResult = await growth.getLotteriesLuckyUsers();
+    // if (luckyusersResult.count > 0) {
+    //   const no1LuckyUser = luckyusersResult.lotteries[0];
+    //   const dipLuckyResult = await growth.dipLucky(no1LuckyUser.history_id);
+    //   if (dipLuckyResult.has_dip) {
+    //     this.dipStatus = 2;
+    //   } else {
+    //     this.dipStatus = 1;
+    //     this.dipValue = dipLuckyResult.dip_value;
+    //   }
+    // }
 
     const luckyResult = await growth.getMyLucky();
     this.luckyValue = luckyResult.total_value;
@@ -180,13 +180,12 @@ class CheckIn {
 掘友: ${this.username}
 ${this.todayStatus === 1 ? `签到成功 +${this.incrPoint} 矿石` : this.todayStatus === 2 ? "今日已完成签到" : "签到失败"}
 ${this.dipStatus === 1 ? `沾喜气 +${this.dipValue} 幸运值` : this.dipStatus === 2 ? "今日已经沾过喜气" : "沾喜气失败"}
-${
-  this.bugStatus === 1
-    ? this.collectBugCount > 0
-      ? `收集Bug +${this.collectBugCount}`
-      : "没有可收集Bug"
-    : "收集Bug失败"
-}
+${this.bugStatus === 1
+        ? this.collectBugCount > 0
+          ? `收集Bug +${this.collectBugCount}`
+          : "没有可收集Bug"
+        : "收集Bug失败"
+      }
 连续签到天数 ${this.contCount}
 累计签到天数 ${this.sumCount}
 当前矿石数 ${this.sumPoint}
