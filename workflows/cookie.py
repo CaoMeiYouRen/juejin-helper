@@ -1,3 +1,4 @@
+import sys
 import urllib
 import requests
 import json
@@ -31,15 +32,18 @@ def serialize_cookie(cookie):
 
 
 if __name__ == "__main__":
-    data = get_cloud_cookie()
-    # 环境变量；域名
-    env = ""
-    for key, value in cookie_map.items():
-        cookies = data["cookie_data"][value]
-        cookie_str = "; ".join([serialize_cookie(c) for c in cookies])
-        env_str = f'{key}="{cookie_str}"\n'
-        env += env_str
+    try:
+        data = get_cloud_cookie()
+        # 环境变量；域名
+        env = ""
+        for key, value in cookie_map.items():
+            cookies = data["cookie_data"][value]
+            cookie_str = "; ".join([serialize_cookie(c) for c in cookies])
+            env_str = f'{key}="{cookie_str}"\n'
+            env += env_str
 
-    env = env.strip()
-    with open(".env", "w", encoding="utf-8") as f:
-        f.write(env)
+        env = env.strip()
+        with open(".env", "w", encoding="utf-8") as f:
+            f.write(env)
+    except:
+        print("Unexpected error:", sys.exc_info()[0])
