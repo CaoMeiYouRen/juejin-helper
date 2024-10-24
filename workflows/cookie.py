@@ -18,7 +18,7 @@ def get_cloud_cookie():
     url = COOKIE_CLOUD_URL
     payload = json.dumps({"password": USER_PASSWORD})
     headers = {"Content-Type": "application/json"}
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=60)
     return json.loads(response.text)
 
 
