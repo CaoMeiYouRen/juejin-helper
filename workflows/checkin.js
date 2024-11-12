@@ -199,6 +199,20 @@ ${this.lotteryCount > 0 ? "==============\n" + drawLotteryHistory + "\n=========
   }
 }
 
+// 重试函数
+async function retry(fn, times) {
+  let count = 0;
+  while (count < times) {
+    try {
+      return await fn();
+    } catch (e) {
+      console.error(e);
+      count++;
+      await utils.wait(utils.randomRangeNumber(1000, 5000));
+    }
+  }
+}
+
 async function run(args) {
   const cookies = utils.getUsersCookie(env);
   let messageList = [];
@@ -221,11 +235,20 @@ async function run(args) {
   });
 }
 
-run(process.argv.splice(2)).catch(error => {
+
+retry(run, 3).catch(error => {
+  console.error(error);
   pushMessage({
     subject: "掘金每日签到",
     html: `<strong>Error</strong><pre>${error.message}</pre>`
   });
-
-  throw error;
 });
+
+// run(process.argv.splice(2)).catch(error => {
+//   pushMessage({
+//     subject: "掘金每日签到",
+//     html: `<strong>Error</strong><pre>${error.message}</pre>`
+//   });
+
+//   throw error;
+// });
